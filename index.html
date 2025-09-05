@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MNIST - Predictor de Dígitos</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="main-container">
+    <div class="header">
+      <h1>🤖 MNIST Digit Predictor</h1>
+      <p>Reconocimiento de dígitos con redes neuronales</p>
+    </div>
+
+    <div class="status-section loading" id="statusSection">
+      <span class="loading-spinner"></span>
+      Cargando modelos neuronales...
+    </div>
+
+    <div class="content">
+      <div class="drawing-section">
+        <!-- Canvas principal -->
+        <div class="canvas-wrapper">
+          <div class="canvas-card">
+            <div class="canvas-title">✏️ Dibuja un dígito del 0 al 9</div>
+            <canvas id="canvas" width="200" height="200"></canvas>
+          </div>
+        </div>
+
+        <!-- Preview canvas -->
+        <div class="preview-section">
+          <div class="preview-container">
+            <div class="canvas-title">🔍 Vista del modelo (28×28)</div>
+            <canvas id="previewCanvas" width="112" height="112"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="btn btn-predict" id="predictBtn" disabled>
+          <span>🔮</span>
+          <span>Predecir</span>
+        </button>
+        <button class="btn btn-clear" id="clearBtn">
+          <span>🗑️</span>
+          <span>Limpiar</span>
+        </button>
+      </div>
+
+      <div class="prediction-section">
+        <h2 class="section-title">Resultados de Predicción</h2>
+
+        <div class="models-grid">
+          <!-- Modelo Denso -->
+          <div class="model-card">
+            <div class="model-header">
+              <div class="model-title">🧠 Red Neuronal Densa</div>
+              <div class="model-description">
+                Arquitectura completamente conectada con capas densas tradicionales
+              </div>
+              <div class="model-status status-loading" id="status1">
+                <span class="loading-spinner"></span>
+                Cargando...
+              </div>
+            </div>
+            <div class="prediction-display">
+              <div class="prediction-number" id="pred1">?</div>
+              <div class="confidence-bar-container">
+                <div class="confidence-label">Nivel de confianza</div>
+                <div class="confidence-bar">
+                  <div class="confidence-fill" id="confBar1" style="width: 0%"></div>
+                </div>
+                <div class="confidence-percentage" id="conf1">0%</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modelo CNN Simple -->
+          <div class="model-card">
+            <div class="model-header">
+              <div class="model-title">🔍 Red Neuronal Convolucional</div>
+              <div class="model-description">
+                CNN básica con capas de convolución para detección de patrones espaciales
+              </div>
+              <div class="model-status status-loading" id="status2">
+                <span class="loading-spinner"></span>
+                Cargando...
+              </div>
+            </div>
+            <div class="prediction-display">
+              <div class="prediction-number" id="pred2">?</div>
+              <div class="confidence-bar-container">
+                <div class="confidence-label">Nivel de confianza</div>
+                <div class="confidence-bar">
+                  <div class="confidence-fill" id="confBar2" style="width: 0%"></div>
+                </div>
+                <div class="confidence-percentage" id="conf2">0%</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modelo CNN Avanzado -->
+          <div class="model-card">
+            <div class="model-header">
+              <div class="model-title">🚀 CNN + Regularización</div>
+              <div class="model-description">
+                CNN con Dropout y Data Augmentation para mejor generalización y robustez
+              </div>
+              <div class="model-status status-loading" id="status3">
+                <span class="loading-spinner"></span>
+                Cargando...
+              </div>
+            </div>
+            <div class="prediction-display">
+              <div class="prediction-number" id="pred3">?</div>
+              <div class="confidence-bar-container">
+                <div class="confidence-label">Nivel de confianza</div>
+                <div class="confidence-bar">
+                  <div class="confidence-fill" id="confBar3" style="width: 0%"></div>
+                </div>
+                <div class="confidence-percentage" id="conf3">0%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección de créditos del autor -->
+    <div class="author-section">
+      <div class="author-content">
+        <div class="author-title">Desarrollado por</div>
+        <div class="author-name">👨‍💻 Raúl Alvarado García</div>
+        <div class="tech-stack">
+          Tecnologías usadas: TensorFlow, TensorFlow.js, HTML5, CSS y JavaScript
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
